@@ -8,3 +8,5 @@ client/build/
 coverage/
 .DS_Store
 npm-debug.log*
+dist/
+!.env.production.example
