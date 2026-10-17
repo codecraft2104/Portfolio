@@ -82,9 +82,9 @@ if (process.env.NODE_ENV === 'production') {
   const clientBuildPath = path.join(__dirname, '../client/dist');
   app.use(express.static(clientBuildPath));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
+  app.get("/{*path}", (req, res) => {
+  res.sendFile(path.join(clientBuildPath, "index.html"));
+});
 } else {
   app.get('/', (req, res) => {
     res.json({
@@ -94,6 +94,15 @@ if (process.env.NODE_ENV === 'production') {
     });
   });
 }
+
+
+// Handle requests to unknown API endpoints
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "API endpoint not found"
+  });
+});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Portfolio server running on http://localhost:${PORT}`);
