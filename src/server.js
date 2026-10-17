@@ -8,8 +8,14 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import { testConnection } from "./config/db.js";
+import { fileURLToPath } from "node:url";
+
+
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = Number(process.env.PORT || 5000);
