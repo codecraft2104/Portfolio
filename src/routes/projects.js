@@ -1,6 +1,10 @@
-const express = require('express');
-const { pool } = require('../config/db');
-const { projects: fallbackProjects } = require('../data/projectsSeed');
+// const express = require('express');
+// const { pool } = require('../config/db');
+// const { projects: fallbackProjects } = require('../data/projectsSeed');
+
+import express from 'express';
+import { pool } from '../config/db.js';
+import { projects as fallbackProjects } from '../data/projectsSeed.js';
 
 const router = express.Router();
 
@@ -80,4 +84,4 @@ router.get('/:slug', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

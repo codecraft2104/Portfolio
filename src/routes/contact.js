@@ -1,8 +1,19 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const { pool } = require('../config/db');
+import nodemailer from 'nodemailer';
+import express from 'express';
+import pool from '../config/db.js'; 
+import rateLimit from 'express-rate-limit';
 
 const router = express.Router();
+
+const contactRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many contact requests, please try again later.' },
+});
+
+router.use(contactRateLimiter);
 
 function sanitizeText(value, maxLength = 255) {
   if (typeof value !== 'string') return '';
@@ -79,4 +90,5 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+
+export default router;

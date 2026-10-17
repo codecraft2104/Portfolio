@@ -1,12 +1,13 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const path = require('path');
-const dotenv = require('dotenv');
-const { testConnection } = require('./config/db');
-const projectRoutes = require('./routes/projects');
-const contactRoutes = require('./routes/contact');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import pool from "./config/db.js";
+import projectRoutes from "./routes/projects.js";
+import contactRoutes from "./routes/contact.js";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import path from "path";
+import { testConnection } from "./config/db.js";
 
 dotenv.config();
 

@@ -1,7 +1,6 @@
-import "dotenv/config";
 
-const mysql = require('mysql2/promise');
-const dotenv = require('dotenv');
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -30,4 +29,5 @@ async function testConnection() {
   }
 }
 
-module.exports = { pool, dbConfig, testConnection };
+export { pool, testConnection };
+export default pool;
