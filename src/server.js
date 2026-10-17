@@ -80,11 +80,6 @@ app.use((err, req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
   const clientBuildPath = path.join(__dirname, '../client/dist');
-  app.use(express.static(clientBuildPath));
-
-  app.get("/{*path}", (req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
-});
 } else {
   app.get('/', (req, res) => {
     res.json({
