@@ -1,21 +1,14 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import pool from "./config/db.js";
 import projectRoutes from "./routes/projects.js";
 import contactRoutes from "./routes/contact.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import { testConnection } from "./config/db.js";
-import { fileURLToPath } from "node:url";
-
-
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = Number(process.env.PORT || 5000);
@@ -78,18 +71,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '../client/dist');
-} else {
-  app.get('/', (req, res) => {
-    res.json({
-      name: 'Madhuri Portfolio API',
-      status: 'running',
-      routes: ['/api/health', '/api/projects', '/api/projects/:slug', '/api/contact'],
-    });
+app.get("/", (req, res) => {
+  res.json({
+    name: "Madhuri Portfolio API",
+    status: "running",
+    routes: [
+      "/api/health",
+      "/api/projects",
+      "/api/projects/:slug",
+      "/api/contact"
+    ]
   });
-}
-
+});
 
 // Handle requests to unknown API endpoints
 app.use((req, res) => {
